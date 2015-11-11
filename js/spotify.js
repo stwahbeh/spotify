@@ -1,35 +1,50 @@
-//2ca5d9af099947f18a90d7b1effa0c84 spotify Client ID  
-//ab2a2536b6524864bbe2071afdf8caa9 spotify secret Client ID
+
+
 var data;
-var catPlaylistUrl = 'https://api.spotify.com/v1/browse/categories/'
-var categoriesUrl = 'https://api.spotify.com/v1/browse/categories/{category_id}'
+var artistUrl = 'https://api.spotify.com/v1/search?q='
+var albumsUrl = 'https://api.spotify.com/v1/artists/{id}/albums'
+var trackUrl = 'https://api.spotify.com/v1/albums/{id}/tracks'
 var myApp = angular.module('myApp', [])
+var accessToken;
+
 
 
 //gets featured categories on load
 var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
   
+
   $scope.imageObject = {}
-  $scope.getCategories = function() {
-    $http.get(categoriesUrl).success(function(response){
-      data = $scope.categories = response.categories.images 
-      console.log(data);     
+  $scope.getArtist = function() {
+    var q = $('artistFirst') + '&20' + $('artistLast')
+    console.log(q);
+    $http.get(artistUrl + q).success(function(response){
+      console.log("1");
+      data = $scope.artist = response.artist.id 
+      console.log('2');     
     })
 
   }
-  $scope.getCategories();
+  //$scope.getCategories();
 
 
 
 //{category_id}/playlists
-//   $scope.getPlaylists = function(category){
-//     $('#display').empty()
-//     $scope.playlistObject = {}
-//     $http.get(catPlaylistUrl + $scope.genre).success(function(response){
-//       data = $scope.playlists = response.genre.images
+  $scope.getArtistAlbums = function(category){
+    $('#display').empty()
+    $scope.albumObject = {}
+    $http.get(catPlaylistUrl + $scope.artist).success(function(response){
+      data = $scope.album = response.album.images
 
-//     })
-//   }
+    })
+  }
+
+  $scope.getAlbumTracks = function() {
+    $('#display').empty()
+    $scope.track = {}
+    $http.get(trackUrl + $scope.track).success(function(response){
+      data = $scope.track = response.track.images
+    })
+  }
 
 
 

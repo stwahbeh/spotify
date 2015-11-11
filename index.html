@@ -27,11 +27,15 @@
         <form class="container" name="songForm">
         
             <div class="form-group">
-                <label class="label">Genre</label>
-                <input name="search" placeholder="Enter your Genre..." ng-model="genre" class="form-control"></input>
+                <label class="label">Artist first name</label>
+                <input name="first" placeholder="Enter your artist's first name..." ng-model="artistFirst" class="form-control"></input>
+            </div>
+             <div class="form-group">
+                <label class="label">Artist last name</label>
+                <input name="last" placeholder="Enter your artist's last name..." ng-model="artistLast" class="form-control"></input>
             </div>
             <div class="form-group">
-                <button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getCategories(search)" type="submit">Submit</button>
+                <button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getArtist(search)" type="submit">Submit</button>
             </div>
         </form>
 
@@ -44,7 +48,7 @@
             <div class="row">
                 <div class="col-xs-12 col-md-6">
                     <div class="container" id="display">
-                        <li ng-repeat="categories in categories" class="" ng-click="getPlaylists(category_id)" title="{{category.name}}">{{category.image + category.name}}</li>
+                        <li ng-repeat="artist in artists" class="" ng-click="getArtist(category_id)" title="{{artist.name}}">{{artist.image + artist.name}}</li>
                         
                     </div>
                 </div>
