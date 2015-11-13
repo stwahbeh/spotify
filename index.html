@@ -28,11 +28,7 @@
         
             <div class="form-group">
                 <label class="label">Artist first name</label>
-                <input name="first" placeholder="Enter your artist's first name..." ng-model="artistFirst" class="form-control"></input>
-            </div>
-             <div class="form-group">
-                <label class="label">Artist last name</label>
-                <input name="last" placeholder="Enter your artist's last name..." ng-model="artistLast" class="form-control"></input>
+                <input name="search" placeholder="Enter your artist's first name..." ng-model="artist" class="form-control"></input>
             </div>
             <div class="form-group">
                 <button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getArtist(search)" type="submit">Submit</button>
@@ -42,17 +38,11 @@
         <!-- Results -->
         <div class="container-fixed">
             <div class="help-block">
-                <span ng-show="tracks.length>0">Click to sample</span>
-                <span ng-show="currentSong && !audioObject.paused">(playing)</span>
+                <span ng-show="artists.length>0">Click to see their albums</span>
             </div>
-            <div class="row">
-                <div class="col-xs-12 col-md-6">
-                    <div class="container" id="display">
-                        <li ng-repeat="artist in artists" class="" ng-click="getArtist(category_id)" title="{{artist.name}}">{{artist.image + artist.name}}</li>
-                        
-                    </div>
-                </div>
-            </div>
+            <ul>
+                <li ng-repeat="artist in artists" class="" ng-click="getAlbum(album)" title="{{artist.name}}" model="album">{{artist.name}}</li>
+            </ul>
         </div>
     </div>
 </body>

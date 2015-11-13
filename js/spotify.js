@@ -1,7 +1,7 @@
 
 
 var data;
-var artistUrl = 'https://api.spotify.com/v1/search?q='
+var artistUrl = 'https://api.spotify.com/v1/search?type=artist&query=' 
 var albumsUrl = 'https://api.spotify.com/v1/artists/{id}/albums'
 var trackUrl = 'https://api.spotify.com/v1/albums/{id}/tracks'
 var myApp = angular.module('myApp', [])
@@ -11,16 +11,14 @@ var accessToken;
 
 //gets featured categories on load
 var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
-  
 
-  $scope.imageObject = {}
+  $scope.audioObject = {}
   $scope.getArtist = function() {
-    var q = $('artistFirst') + '&20' + $('artistLast')
-    console.log(q);
-    $http.get(artistUrl + q).success(function(response){
-      console.log("1");
-      data = $scope.artist = response.artist.id 
-      console.log('2');     
+    // var q = $scope.fArtist + '%20' + $scope.lArtist 
+    $http.get(artistUrl + $scope.artist).success(function(response){
+      data = $scope.artists = response.artists.items  
+      console.log(data);  
+  
     })
 
   }
