@@ -2,9 +2,10 @@
 
 var data;
 var albumUrl = 'https://api.spotify.com/v1/search?type=album&query=' 
-var trackUrl = 'https://api.spotify.com/v1/search?type=track&query='
+var trackUrl = 'https://api.spotify.com/v1/albums/'
 var myApp = angular.module('myApp', [])
 var accessToken;
+var search;
 
 
 
@@ -14,10 +15,12 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
 
   $scope.audioObject = {}
   $scope.getAlbum = function() {
-    
-    $http.get(albumUrl + $scope.album).success(function(response){
-      data = $scope.albums = response.albums.items  
-      console.log(data);  
+    $scope.notTracks = false;
+    $scope.notAlbum = true;
+    search = albumUrl + $scope.album 
+    $http.get(search).success(function(response){
+      data = $scope.albums = response.albums.items 
+      $scope.notTracks = !$scope.notTracks; 
   
     })
 
@@ -25,14 +28,29 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
   //pre-loads categories
   //$scope.getCategories(); 
 
-
+$scope.switchView = function(){
+   $scope.notTracks = false;
+   $scope.notAlbum = true;
+   $http.get(search).success(function(response){
+      data = $scope.albums = response.albums.items 
+      $scope.notTracks = !$scope.notTracks; 
+})
+ }
 
 // {category_id}/playlists
   $scope.getTracks = function(category){
-    $('#display').empty()
+    var id = category;
+    $scope.notTracks = true;
+    $scope.notAlbum = false;
     $scope.trackObject = {}
-    $http.get(trackUrl + $scope.track).success(function(response){
-    data = $scope.tracks = response.tracks.items
+    $http.get(trackUrl + id + '/tracks').success(function(response){  
+    console.log(response);
+    data = $scope.tracks = response.items
+    console.log(data);
+   
+    $scope.notAlbum = !$scope.notAlbum; 
+    console.log("clear albums");
+
 
     })
   }

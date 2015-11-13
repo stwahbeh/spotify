@@ -1,6 +1,6 @@
 # spotify
 
-1. The purpose of this app is to allow users to guess which playlist cover belongs to which playlist. Some people name their playlists really weird and I thought it would be interesting to see if a person could guess the name.
+1. The purpose of this app is to allow users to see the playlists of the albums that they are looking for.
 
 2. http://students.washington.edu/stwahbeh/info343/spotify
 

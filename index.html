@@ -28,7 +28,7 @@
 
             <div class="form-group">
                 <label class="label">Album name</label>
-                <input name="search" placeholder="Enter your album name..." ng-model="album" class="form-control"></input>
+                <input name="search" placeholder="Enter your album name..." ng-model="album" class="form-control" ng-click="getAlbum(search)"></input>
             </div>
             <div class="form-group">
                 <button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getAlbum(search)" type="submit">Submit</button>
@@ -38,17 +38,31 @@
         <!-- Results -->
         <div class="container-fixed">
             <div class="help-block">
-                <span ng-show="albums.length>0">Click to see album track</span>
+                <span ng-show="notAlbum" class="font">  Click to see an album's track</span>
+            </div>
+            <div ng-repeat="album in albums" class="col-md-4 img" title="{{album.name}}" model="album" ng-click="getTracks(album.id)" ng-show="notAlbum">
+                <image ng-click="getTracks(album.id)" title="{{album.name}}" ng-src="{{album.images[1].url}}"></image>
+                <p ng-click="getTracks(album.id)" class="font">{{album.name}}</p>
+            </div>
+           
+            <div class="col-md-12">
+                 <div class="help-block">
+            <span ng-show="notTracks" class="font" >Click to play track</span>
+            <span ng-show="notTracks" ng-click="switchView()" class="font"> |  Click to go back to albums</span>
+            <span ng-show="currentSong && !audioObject.paused" class="font">(playing)</span>
             </div>
             <ul>
-                <div ng-repeat="album in albums" class="col-md-4 img" ng-click="getTrack(album)" title="{{album.name}}" model="album" name='display'>
-                    <image ng-click="" title="{{album.name}}" ng-src="{{album.images[1].url}}"></image>
-                    <p ng-click="play(track.preview_url)">{{album.name}}</p> 
-                            
-            </div>
+            <li ng-repeat="track in tracks" title="{{track.name}}" ng-show="notTracks" ng-click="play(track.preview_url)" class="font">
+                
+                {{track.name}}
+            </li>
             </ul>
+            </div>
+            </div>
+
         </div>
     </div>
 </body>
 
 </html>
+            
