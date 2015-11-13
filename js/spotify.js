@@ -27,7 +27,7 @@ var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
 
 
 
-//{category_id}/playlists
+// {category_id}/playlists
   $scope.getTracks = function(category){
     $('#display').empty()
     $scope.trackObject = {}
