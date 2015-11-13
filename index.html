@@ -27,21 +27,21 @@
         <form class="container" name="songForm">
         
             <div class="form-group">
-                <label class="label">Artist first name</label>
-                <input name="search" placeholder="Enter your artist's first name..." ng-model="artist" class="form-control"></input>
+                <label class="label">Album name</label>
+                <input name="search" placeholder="Enter your album name..." ng-model="album" class="form-control"></input>
             </div>
             <div class="form-group">
-                <button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getArtist(search)" type="submit">Submit</button>
+                <button ng-disabled="songForm.search.$invalid" class="btn btn-primary" ng-click="getAlbum(search)" type="submit">Submit</button>
             </div>
         </form>
 
         <!-- Results -->
         <div class="container-fixed">
             <div class="help-block">
-                <span ng-show="artists.length>0">Click to see their albums</span>
+                <span ng-show="albums.length>0">Click to see their albums</span>
             </div>
             <ul>
-                <li ng-repeat="artist in artists" class="" ng-click="getAlbum(album)" title="{{artist.name}}" model="album">{{artist.name}}</li>
+                <li ng-repeat="album in albums" class="" ng-click="getAlbum(album)" title="{{album.name}}" model="album" name='display'>{{album.name}}</li>
             </ul>
         </div>
     </div>

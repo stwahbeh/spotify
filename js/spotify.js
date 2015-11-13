@@ -1,11 +1,11 @@
 
 
 var data;
-var artistUrl = 'https://api.spotify.com/v1/search?type=artist&query=' 
-var albumsUrl = 'https://api.spotify.com/v1/artists/{id}/albums'
-var trackUrl = 'https://api.spotify.com/v1/albums/{id}/tracks'
+var albumUrl = 'https://api.spotify.com/v1/search?type=album&query=' 
+var trackUrl = 'https://api.spotify.com/v1/search?type=track&query='
 var myApp = angular.module('myApp', [])
 var accessToken;
+
 
 
 
@@ -13,37 +13,29 @@ var accessToken;
 var myCtrl = myApp.controller('myCtrl', function($scope, $http) {
 
   $scope.audioObject = {}
-  $scope.getArtist = function() {
-    // var q = $scope.fArtist + '%20' + $scope.lArtist 
-    $http.get(artistUrl + $scope.artist).success(function(response){
-      data = $scope.artists = response.artists.items  
+  $scope.getAlbum = function() {
+    
+    $http.get(albumUrl + $scope.album).success(function(response){
+      data = $scope.albums = response.albums.items  
       console.log(data);  
   
     })
 
   }
-  //$scope.getCategories();
+  //pre-loads categories
+  //$scope.getCategories(); 
 
 
 
 //{category_id}/playlists
-  $scope.getArtistAlbums = function(category){
+  $scope.getTracks = function(category){
     $('#display').empty()
-    $scope.albumObject = {}
-    $http.get(catPlaylistUrl + $scope.artist).success(function(response){
-      data = $scope.album = response.album.images
-
-    })
-  }
-
-  $scope.getAlbumTracks = function() {
-    $('#display').empty()
-    $scope.track = {}
+    $scope.trackObject = {}
     $http.get(trackUrl + $scope.track).success(function(response){
-      data = $scope.track = response.track.images
+    data = $scope.tracks = response.tracks.items
+
     })
   }
-
 
 
   //plays songs
